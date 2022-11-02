@@ -27,6 +27,7 @@ app.post('/login', login)
 app.get('/posts', getAllPosts)
 
 ///CRUD POSTS - auth required
+//uses isAuthenticate, if all passes 
 app.get('/userposts/:userId', getCurrentUserPosts)
 app.post('/posts', isAuthenticated, addPost)
 app.put('/posts/:id', isAuthenticated, editPost)

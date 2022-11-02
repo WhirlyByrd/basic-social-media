@@ -2,7 +2,7 @@ import { useState, createContext, useCallback, useEffect } from 'react'
 
 let logoutTimer
 
-//creates the context data to be used through app
+//creates the context object to be used through app to store global values
 const AuthContext = createContext({
   token: '',
   login: () => {},

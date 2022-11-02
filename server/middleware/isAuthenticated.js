@@ -7,6 +7,8 @@ const {SECRET} = process.env
 
 //export isAuthenticated function
 module.exports = {
+    //express knows the order that req, res, and next are in and knows what they
+    // of where they are called in the parenthesis
     isAuthenticated: (req, res, next) => {
         //set up a required header token
         const headerToken = req.get('Authorization')
@@ -32,7 +34,8 @@ module.exports = {
             error.statusCode = 401
             throw error
         }
-
+        
+        // next with move the request along to the appropriate function
         next()
     }
 }
