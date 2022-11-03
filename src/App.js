@@ -18,11 +18,11 @@ const App = () => {
       <Header/>
       <Routes>
         <Route path='/' element={<Home/>}/>
-        //if no authCtx token, go to Auth component else go to home
+        {/* //if no authCtx token, go to Auth component else go to home */}
         <Route path='/auth/*' element={!authCtx.token ? <Auth/> : <Navigate to='/' />}/>
-        //if there is a authCtx token let user go to Form, else go to auth because no permission
+        {/* //if there is a authCtx token let user go to Form, else go to auth because no permission */}
         <Route path='/form' element={authCtx.token ? <Form/> : <Navigate to='/auth'/>}/>
-        //if there is a authCtx token let user go to Profile, else go to auth because no permission
+        {/* //if there is a authCtx token let user go to Profile, else go to auth because no permission */}
         <Route path='/profile' element={authCtx.token? <Profile/>: <Navigate to='/auth'/>}/>
         <Route path='*' element={<Navigate to='/'/>}/>
       </Routes>

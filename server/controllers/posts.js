@@ -1,4 +1,9 @@
 require('dotenv').config()
+const Post = require('../models/post')
+const User = require('../models/user')
+
+
+
 module.exports = {
     getAllPosts: (req, res) => {
         console.log('get all posts')
@@ -8,8 +13,8 @@ module.exports = {
         console.log('current user posts')
     },
 
-    addPost: (req, res) => {
-        console.log('add post')
+    addPost: async (req, res) => {
+        console.log('addPost')
     },
 
     editPost: (req, res) => {

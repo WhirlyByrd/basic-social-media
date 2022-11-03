@@ -2,17 +2,17 @@ const {sequelize} = require('../util/database')
 const {DataTypes} = require('sequelize')
 
 module.exports = {
-    User: sequelize.define('user', 
+    Post: sequelize.define('post',
     {
-        id: 
+        id:
         {
             type: DataTypes.INTEGER,
             autoIncrement: true,
             allowNull: false,
             primaryKey: true
-
-        }, 
-        username: DataTypes.STRING, 
-        hashedPass: DataTypes.STRING
+        },
+        title: DataTypes.STRING,
+        content: DataTypes.TEXT,
+        privateStatus: DataTypes.BOOLEAN
     })
 }

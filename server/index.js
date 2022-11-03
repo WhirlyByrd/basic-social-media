@@ -1,6 +1,10 @@
 /// IMPORTING
 require('dotenv').config();
 
+const {sequelize} = require('./util/database');
+const {User} = require('./models/user')
+const {Post} = require('./models/post')
+
 const express = require('express')
 const cors = require('cors')
 
@@ -15,6 +19,10 @@ const app = express();
 ///MIDDLEWARE to parse requests into JSON
 app.use(express.json())
 app.use(cors())
+
+//setup relationships for User and Post
+User.hasMany(Post)
+Post.belongsTo(User)
 
 
 ///ENDPOINTS
@@ -33,6 +41,9 @@ app.post('/posts', isAuthenticated, addPost)
 app.put('/posts/:id', isAuthenticated, editPost)
 app.delete('posts/:id', isAuthenticated, deletePost)
 
-
-//listening to port
-app.listen(PORT, () => console.log(`db sync successful and server running on port ${PORT}`))
+//connect to database & listen to port
+sequelize.sync()
+.then(() => {
+    app.listen(PORT, () => console.log(`db sync succesful & server running on port ${PORT}`))
+})
+.catch(err => console.log(err))
