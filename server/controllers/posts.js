@@ -6,8 +6,6 @@ const {User} = require('../models/user')
 
 
 module.exports = {
-    
-
     getAllPosts: async (req, res) => {
         try {
             const posts = await Post.findAll({
@@ -32,7 +30,7 @@ module.exports = {
             await Post.create({title, content, privateStatus: status, userId})
             res.sendStatus(200)
         } catch (error) {
-            console.log('Error in get current user posts')
+            console.log('ERROR in addPost')
             console.log(error)
             res.sendStatus(400)
         }
@@ -48,15 +46,26 @@ module.exports = {
             })
             res.sendStatus(200)
         } catch (error) {
-            console.log('Error in getCurrentUserPosts')
+            console.log('ERROR in editPost')
             console.log(error)
             res.sendStatus(400)
         }
     },
 
-    deletePost: (req, res) => {
-        console.log('delete post')
+    deletePost: async (req, res) => {
+        try {
+            const {id} = req.params
+            await Post.destroy({
+                where: {id: +id}
+            })
+            res.sendStatus(200)
+        } catch (error) {
+            console.log('ERROR in deletePost')
+            console.log(error)
+            res.sendStatus(400)
+        }
     },
+
     getCurrentUserPosts: async (req, res) =>{
         try {
             const {userId} = req.params

@@ -8,6 +8,8 @@ const Auth = () => {
    const [username, setUsername] = useState('')
    const [password, setPassword] = useState('')
    const [register, setRegister] = useState(true)
+   const [message, setMessage] = useState('')
+   const [display, setDisplay] = useState('')
 
    //use context to make data available throughout
     const authCtx = useContext(AuthContext)
@@ -16,6 +18,8 @@ const Auth = () => {
  
    const submitHandler = e => {
        e.preventDefault()
+
+       setDisplay('none')
 
        // data being captured 
        const body = {
@@ -31,7 +35,8 @@ const Auth = () => {
         authCtx.login(res.data.token, res.data.exp, res.data.userId)
        })
        .catch(err => {
-        console.log(err)
+        setMessage(err.response.data)
+        setDisplay('block')
         setPassword('')
         setUsername('')
        })
@@ -44,12 +49,14 @@ const Auth = () => {
            <h1>Welcome!</h1>
            <form className='form auth-form' onSubmit={submitHandler}>
                <input
+                    required
                     type='text'
                     placeholder='username'
                     value={username}
                     onChange={e => setUsername(e.target.value)}
                    className='form-input'/>
                <input
+                    required
                     type='text'
                     placeholder='password'
                     value={password}

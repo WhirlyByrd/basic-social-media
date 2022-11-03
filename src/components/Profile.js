@@ -1,8 +1,5 @@
-
-
 import {useContext, useEffect, useState, useCallback} from 'react'
 import axios from 'axios'
-
 import AuthContext from '../store/authContext'
 
 const Profile = () => {
@@ -11,7 +8,7 @@ const Profile = () => {
     const [posts, setPosts] = useState([])
 
     const getUserPosts = useCallback(() => {
-        axios.get(`http://localhost:4005/userposts/${userId}`)
+        axios.get(`/userposts/${userId}`)
             .then(res => setPosts(res.data))
             .catch(err => console.log(err))
     }, [userId])
