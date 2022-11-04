@@ -13,6 +13,7 @@ const Home = () => {
         axios.get('/posts')
         .then(res => {
             if (userId) {
+                //returning posts that are not made by user
                 const otherUsersPosts = res.data.filter(post => userId !== post.userId)
                 setPosts(otherUsersPosts)
             } else {
@@ -23,7 +24,7 @@ const Home = () => {
             console.log(err)
         })
     }, [userId])
-
+    console.log(posts)
     const mappedPosts = posts.map(post => {
         return (
             <div key={post.id} className='post-card'>

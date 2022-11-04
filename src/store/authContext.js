@@ -82,6 +82,10 @@ export const AuthContextProvider = (props) => {
   useEffect(() => {
     if (localData) {
       logoutTimer = setTimeout(logout, localData.duration)
+      //'refresh sets userId to null', 
+      //saved it to state as a number to render
+      let storedId = localStorage.getItem('userId')
+      setUserId(+storedId)
     }
   }, [localData, logout])
 
